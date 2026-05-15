@@ -27,7 +27,7 @@ BEGIN
     SELECT
         ac.file_path,
         ac.file_name,
-        AI_TRANSCRIBE(ac.audio_file, {}, TRUE),
+        TO_VARIANT(AI_TRANSCRIBE(ac.audio_file, {}, TRUE)),
         CURRENT_TIMESTAMP()
     FROM AUDIO_CATALOG ac
     LEFT JOIN AUDIO_TRANSCRIPTIONS at
@@ -60,7 +60,7 @@ Respond in JSON only.', TO_VARCHAR(PARSE_JSON(t.transcription_result:value):text
     LEFT JOIN AUDIO_BRAND_MENTIONS abm
         ON t.file_path = abm.file_path
     WHERE abm.file_path IS NULL
-      AND t.transcription_result:error IS NULL;
+      AND TO_VARCHAR(t.transcription_result:error) IS NULL;
 
     RETURN 'Audio brand mention analysis complete — new transcripts processed';
 END;

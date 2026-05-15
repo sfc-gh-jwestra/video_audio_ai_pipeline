@@ -27,7 +27,7 @@ BEGIN
     SELECT
         vc.file_path,
         vc.file_name,
-        AI_TRANSCRIBE(vc.video_file, {}, TRUE),
+        TO_VARIANT(AI_TRANSCRIBE(vc.video_file, {}, TRUE)),
         CURRENT_TIMESTAMP()
     FROM VIDEO_CATALOG vc
     LEFT JOIN VIDEO_TRANSCRIPTIONS vt
@@ -60,7 +60,7 @@ Respond in JSON only.', TO_VARCHAR(PARSE_JSON(t.transcription_result:value):text
     LEFT JOIN VIDEO_BRAND_MENTIONS vbm
         ON t.file_path = vbm.file_path
     WHERE vbm.file_path IS NULL
-      AND t.transcription_result:error IS NULL;
+      AND TO_VARCHAR(t.transcription_result:error) IS NULL;
 
     RETURN 'Video brand mention analysis complete — new transcripts processed';
 END;

@@ -1,0 +1,12 @@
+## Test with a video upload
+Upload file and refresh stage. 
+Stage = VIDEO_STAGE. 
+File =  ~/Projects/Multimodal_Dataset_for_Sentiment_Analysis_and_Classification/Brands/chunked/PXL_20260514_204505219-chunk-00.mp4
+
+
+## After a SQL file refactor
+Update any sql objects that were modified by running their respective .sql files. If an object did not change, don't run its .sql file.
+
+## Deploy whole solution
+Run .sql files prefixed with 01-12 in order.
+Deploy the streamlit application.
