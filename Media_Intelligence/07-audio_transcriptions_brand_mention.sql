@@ -48,12 +48,47 @@ BEGIN
         t.file_path,
         t.file_name,
         AI_COMPLETE(
-            'claude-sonnet-4-6',
-            PROMPT('You are a brand intelligence analyst. Analyze this transcript for brand mentions, sentiment, and marketing insights.
+            model => 'claude-sonnet-4-6',
+            prompt => CONCAT('You are a brand intelligence analyst. Analyze this transcript for brand mentions, sentiment, and marketing insights.
 Transcript:
-{0}
-Extract all brand mentions with context, sentiment, and whether the mention is organic or paid.
-Respond in JSON only.', TO_VARCHAR(PARSE_JSON(t.transcription_result:value):text))
+', TO_VARCHAR(PARSE_JSON(t.transcription_result:value):text), '
+Extract all brand mentions with context, sentiment, and whether the mention is organic or paid.'),
+            response_format => {
+                'type': 'json',
+                'schema': {
+                    'type': 'object',
+                    'properties': {
+                        'brand_mentions': {
+                            'type': 'array',
+                            'items': {
+                                'type': 'object',
+                                'properties': {
+                                    'brand_name': {'type': 'string'},
+                                    'sentiment': {'type': 'string', 'enum': ['positive', 'neutral', 'negative', 'mixed']},
+                                    'mention_type': {'type': 'string', 'enum': ['organic', 'paid', 'unknown']},
+                                    'mention_context': {'type': 'string'},
+                                    'product_category': {'type': 'string'},
+                                    'mention_count': {'type': 'number'},
+                                    'sentiment_reasoning': {'type': 'string'}
+                                },
+                                'required': ['brand_name', 'sentiment', 'mention_type', 'mention_context']
+                            }
+                        },
+                        'total_brands_identified': {'type': 'number'},
+                        'transcript_summary': {'type': 'string'},
+                        'marketing_insights': {
+                            'type': 'object',
+                            'properties': {
+                                'content_category': {'type': 'string'},
+                                'key_themes': {'type': 'array', 'items': {'type': 'string'}},
+                                'paid_mention_count': {'type': 'number'},
+                                'organic_mention_count': {'type': 'number'}
+                            }
+                        }
+                    },
+                    'required': ['brand_mentions', 'total_brands_identified', 'transcript_summary', 'marketing_insights']
+                }
+            }
         ),
         t.transcribed_at
     FROM AUDIO_TRANSCRIPTIONS t
