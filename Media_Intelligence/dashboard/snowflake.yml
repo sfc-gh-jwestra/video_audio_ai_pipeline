@@ -1,0 +1,17 @@
+definition_version: 2
+entities:
+  media_intelligence_dashboard:
+    type: streamlit
+    identifier:
+      name: MEDIA_INTELLIGENCE_DASHBOARD
+      database: MEDIA_INTELLIGENCE
+      schema: BRAND_INSIGHTS
+    query_warehouse: AI_MEDIA_WH
+    runtime_name: SYSTEM$ST_CONTAINER_RUNTIME_PY3_11
+    compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    external_access_integrations:
+      - PYPI_ACCESS
+    main_file: streamlit_app.py
+    artifacts:
+      - streamlit_app.py
+      - pyproject.toml
