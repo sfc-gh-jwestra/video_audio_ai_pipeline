@@ -82,7 +82,7 @@ Respond in JSON only.',
                                  'approval_recommendation']
                 }
             }
-        ),
+        , TRUE),
         CURRENT_TIMESTAMP()
     FROM VIDEO_CATALOG vc
     LEFT JOIN COMPLIANCE_RESULTS cr

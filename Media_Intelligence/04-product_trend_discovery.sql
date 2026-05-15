@@ -82,7 +82,7 @@ Respond in JSON only.',
                                  'campaign_opportunity_score', 'campaign_angle_suggestion']
                 }
             }
-        ),
+        , TRUE),
         CURRENT_TIMESTAMP()
     FROM VIDEO_CATALOG vc
     LEFT JOIN PRODUCT_TREND_RESULTS ptr

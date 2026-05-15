@@ -67,7 +67,7 @@ Respond in JSON only.',
                                  'key_audio_cues', 'target_audience_inferred', 'content_category']
                 }
             }
-        ),
+        , TRUE),
         CURRENT_TIMESTAMP()
     FROM VIDEO_CATALOG vc
     LEFT JOIN BRAND_SENTIMENT_RESULTS bsr

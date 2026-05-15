@@ -75,7 +75,7 @@ for a brand or platform. Respond in JSON only.',
                     }
                 }
             }
-        ),
+        , TRUE),
         CURRENT_TIMESTAMP()
     FROM VIDEO_CATALOG vc
     LEFT JOIN CONTENT_MODERATION_RESULTS cmr
