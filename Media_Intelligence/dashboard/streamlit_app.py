@@ -14,7 +14,7 @@ def get_connection():
 
 @st.cache_data(ttl=300)
 def load_brand_sentiment() -> pd.DataFrame:
-    df = get_connection().query("SELECT * FROM V_BRAND_SENTIMENT_FLAT")
+    df = get_connection().query("SELECT * FROM MEDIA_INTELLIGENCE.BRAND_INSIGHTS.V_BRAND_SENTIMENT_FLAT")
     df.columns = df.columns.str.lower()
     return df
 
@@ -27,7 +27,7 @@ def load_top_brands() -> pd.DataFrame:
             COUNT(*) AS total_appearances,
             SUM(CASE WHEN brand_specific_sentiment = 'positive' THEN 1 ELSE 0 END) AS positive_count,
             ROUND(positive_count / total_appearances * 100, 1) AS positive_pct
-        FROM V_BRAND_SENTIMENT_FLAT
+        FROM MEDIA_INTELLIGENCE.BRAND_INSIGHTS.V_BRAND_SENTIMENT_FLAT
         GROUP BY detected_brand
         ORDER BY total_appearances DESC
         LIMIT 20
@@ -38,7 +38,7 @@ def load_top_brands() -> pd.DataFrame:
 
 @st.cache_data(ttl=300)
 def load_content_safety() -> pd.DataFrame:
-    df = get_connection().query("SELECT * FROM V_CONTENT_SAFETY_SUMMARY")
+    df = get_connection().query("SELECT * FROM MEDIA_INTELLIGENCE.BRAND_INSIGHTS.V_CONTENT_SAFETY_SUMMARY")
     df.columns = df.columns.str.lower()
     return df
 
@@ -53,7 +53,7 @@ def load_moderation_actions() -> pd.DataFrame:
             violence_level,
             hate_speech_level,
             age_rating
-        FROM V_CONTENT_SAFETY_SUMMARY
+        FROM MEDIA_INTELLIGENCE.BRAND_INSIGHTS.V_CONTENT_SAFETY_SUMMARY
         WHERE moderation_action IN ('flag_for_review', 'restrict', 'remove')
         ORDER BY
             CASE moderation_action
@@ -68,7 +68,7 @@ def load_moderation_actions() -> pd.DataFrame:
 
 @st.cache_data(ttl=300)
 def load_compliance() -> pd.DataFrame:
-    df = get_connection().query("SELECT * FROM V_COMPLIANCE_DASHBOARD")
+    df = get_connection().query("SELECT * FROM MEDIA_INTELLIGENCE.BRAND_INSIGHTS.V_COMPLIANCE_DASHBOARD")
     df.columns = df.columns.str.lower()
     return df
 
@@ -82,7 +82,7 @@ def load_compliance_failures() -> pd.DataFrame:
             ftc_compliant,
             brand_safety_score,
             approval_recommendation
-        FROM V_COMPLIANCE_DASHBOARD
+        FROM MEDIA_INTELLIGENCE.BRAND_INSIGHTS.V_COMPLIANCE_DASHBOARD
         WHERE approval_recommendation IN ('reject', 'escalate', 'approve_with_edits')
         ORDER BY brand_safety_score ASC
     """)

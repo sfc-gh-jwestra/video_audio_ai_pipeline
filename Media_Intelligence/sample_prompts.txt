@@ -1,8 +1,3 @@
-## Test with a video upload
-Upload file and refresh stage. 
-Stage = VIDEO_STAGE. 
-File =  ~/Projects/Multimodal_Dataset_for_Sentiment_Analysis_and_Classification/Brands/chunked/PXL_20260514_204505219-chunk-00.mp4
-
 
 ## After a SQL file refactor
 Update any sql objects that were modified by running their respective .sql files. If an object did not change, don't run its .sql file.
@@ -10,3 +5,15 @@ Update any sql objects that were modified by running their respective .sql files
 ## Deploy whole solution
 Run .sql files prefixed with 01-12 in order.
 Deploy the streamlit application.
+
+## Upload a folder of files all under 100 MB
+Upload all mp4 files from the folder and refresh stage.
+Upload each file 30 seconds apart. Do not upload all at once. 
+Folder =  ~/Projects/Multimodal_Dataset_for_Sentiment_Analysis_and_Classification/Brands/chunks/
+Stage = VIDEO_STAGE
+
+## Upload a single video file
+Upload file and refresh stage. 
+Stage = VIDEO_STAGE. 
+File =  ~/Projects/Multimodal_Dataset_for_Sentiment_Analysis_and_Classification/Brands/chunks/PXL_20260514_204505219-chunk-00.mp4
+
