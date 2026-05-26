@@ -1,4 +1,9 @@
-The following project is based off Satish Kumar's Medium article [**Building a Production-Grade Multimodal Video & Audio Intelligence Pipeline with Snowflake Cortex AI**](https://pub.towardsai.net/building-a-production-grade-multimodal-video-audio-intelligence-pipeline-with-snowflake-cortex-ai-686a579486f2). The project takes Satish's initial solution forward in terms of productionizing a Video/Audio AI pipeline. The upgrades applied here include error handling, no more duplicated AI FUNCTION logic across CTAS and TASKs, more efficient triggering and processing of media files, as well as a new Streamlit dashboard to visualize findings on brand sentiment and analysis.
+# Media Intelligence
+
+Media Intelligence demonstrates how to setup a video and audio pipeline to perform automated brand and sentiment analysis at production scale on Snowflake. Upload a video and it will use Snowflake multimodal AI FUNCTIONS to discover brands and sentiment towards them both visually (e.g., logos on a jacket) and from audio transcriptions. Then, it will determine sentiment for each. Visualize the results in a dashboard also directly deployed into Snowflake.
+
+### Credits
+The project is based off Satish Kumar's Medium article [**Building a Production-Grade Multimodal Video & Audio Intelligence Pipeline with Snowflake Cortex AI**](https://pub.towardsai.net/building-a-production-grade-multimodal-video-audio-intelligence-pipeline-with-snowflake-cortex-ai-686a579486f2). Please take a read on Satish's excellent article and then implement it here. The project takes Satish's initial solution forward in terms of productionizing a Video/Audio AI pipeline. The upgrades applied here include error handling, no more duplicated AI FUNCTION logic across CTAS and TASKs, more efficient triggering and processing of media files, as well as a new Streamlit dashboard to visualize findings on brand sentiment and analysis.
 
 ## Deploy whole solution
 Using Snowflake CoCo, ask:
@@ -108,7 +113,7 @@ Source includes `media_intelligence_task_design.md` — a comprehensive task dep
 ### 10. Streamlit Dashboard (Entirely New)
 
 You can now visualize your video / audio brand and sentiment information in a dashboard.
- 
+
 The source code includes a full **Streamlit dashboard** (`dashboard/streamlit_app.py`) with:
 - KPI metrics row (brands detected, positive %, flagged, compliance failures)
 - Three tabs: Brand Sentiment, Content Safety, Compliance
