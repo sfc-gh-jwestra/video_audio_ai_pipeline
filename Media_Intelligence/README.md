@@ -16,8 +16,8 @@ Deploy the streamlit application."
 
 The AI video/audio pipeline triggeres when new video and audio files land in their respective stage on Snowflake.
 Remember the files must support Snowflake codecs and fall within size limits. Check Snowflake documentation for
-details. It is best practice to prepare files before landing them in Snowflake. For example, use FFMPEG to chunk
-large videos into smaller files and encode them properly. 
+details. It is best practice to prepare files before landing them in Snowflake. Preparing video/audio files for you is beyond the scope of the project, but there are examples below. For example, use FFMPEG to chunk large videos into smaller 
+files (see example in /scripts/chunk_videos.py) and encode them properly (see below). 
 
 AI_COMPLETE - handles 100 MB files
 
